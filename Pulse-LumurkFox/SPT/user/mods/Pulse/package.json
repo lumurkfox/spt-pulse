@@ -1,0 +1,15 @@
+{
+    "name":  "Pulse",
+    "author":  "LumurkFox",
+    "version":  "1.0.1",
+    "license":  "MIT",
+    "main":  "Pulse.dll",
+    "sptVersion":  "~4.0.0",
+    "contributors":  [
+                         "Based on Unda by Barlog_M"
+                     ],
+    "url":  "https://github.com/lumurkfox/spt-pulse",
+    "incompatibilities":  [
+                              "li.barlog.unda"
+                          ]
+}

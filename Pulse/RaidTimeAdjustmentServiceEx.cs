@@ -74,6 +74,8 @@ public class RaidTimeAdjustmentServiceEx(
 
             AdjustPMCSpawns(mapBase, raidAdjustments);
         }
+
+        AdjustBossSpawnChances(mapBase);
     }
 
     int GetBossPmcSpawnCount(List<BossLocationSpawn> bossLocationSpawns)
@@ -117,5 +119,40 @@ public class RaidTimeAdjustmentServiceEx(
         }
 
         mapBase.BossLocationSpawn = result;
+    }
+
+    void AdjustBossSpawnChances(LocationBase mapBase)
+    {
+        if (Math.Abs(_modConfig.BossSpawnChancePercent - 100.0) < 0.01)
+        {
+            // No adjustment needed if set to 100%
+            return;
+        }
+
+        var multiplier = _modConfig.BossSpawnChancePercent / 100.0;
+
+        if (_modConfig.Debug)
+        {
+            logger.LogWithColor($"[Pulse] Adjusting boss spawn chances by {_modConfig.BossSpawnChancePercent}% (multiplier: {multiplier})", LogTextColor.Black);
+        }
+
+        foreach (var bossSpawn in mapBase.BossLocationSpawn)
+        {
+            // Skip PMC spawns - only adjust actual bosses
+            if (string.Equals(bossSpawn.BossName, "pmcusec", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(bossSpawn.BossName, "pmcbear", StringComparison.OrdinalIgnoreCase))
+            {
+                continue;
+            }
+
+            var originalChance = bossSpawn.BossChance;
+            var newChance = (int)(bossSpawn.BossChance * multiplier);
+            bossSpawn.BossChance = (byte)Math.Max(0, Math.Min(100, newChance));
+
+            if (_modConfig.Debug)
+            {
+                logger.LogWithColor($"[Pulse] Boss '{bossSpawn.BossName}' spawn chance: {originalChance}% -> {bossSpawn.BossChance}%", LogTextColor.Black);
+            }
+        }
     }
 }
