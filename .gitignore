@@ -1,0 +1,22 @@
+## Build artifacts
+bin/
+obj/
+*.dll
+*.pdb
+
+## IDE files
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+
+## OS files
+.DS_Store
+Thumbs.db
+
+## Keep these files
+!Pulse/bin/Release/net9.0/Pulse.dll
+!Pulse/bin/Release/net9.0/config/
+!Pulse/bin/Release/net9.0/LICENSE
+!Pulse/bin/Release/net9.0/README.md

@@ -1,0 +1,9 @@
+{
+    "MaxPmcGroupSize": 3,
+    "MaxScavGroupSize": 3,
+    "PmcBotDifficulty": "normal",
+    "AssaultWaveCount": 3,
+    "BotCountMultiplierMin": 1.5,
+    "BotCountMultiplierMax": 2.0,
+    "Debug": false
+}
