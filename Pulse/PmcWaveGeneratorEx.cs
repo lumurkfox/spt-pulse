@@ -112,6 +112,13 @@ public class PmcWaveGeneratorEx(
         int minBots = (int)Math.Round(maxBots * _modConfig.BotCountMultiplierMin);
         int maxBotsRange = (int)Math.Round(maxBots * _modConfig.BotCountMultiplierMax);
         var newMaxBotsValue = randomUtil.GetInt(minBots, maxBotsRange);
+
+        // Apply global bot limit if set (overrides multiplier if exceeded)
+        if (_modConfig.GlobalBotLimit > 0 && newMaxBotsValue > _modConfig.GlobalBotLimit)
+        {
+            newMaxBotsValue = _modConfig.GlobalBotLimit;
+        }
+
         var actualMultiplier = (double)newMaxBotsValue / maxBots;
         return SetMaxBotsAmountForLocation(location, maxBots, newMaxBotsValue, actualMultiplier);
     }
@@ -126,6 +133,13 @@ public class PmcWaveGeneratorEx(
         int minBots = (int)Math.Round(maxBots * _modConfig.BotCountMultiplierMin);
         int maxBotsRange = (int)Math.Round(maxBots * _modConfig.BotCountMultiplierMax);
         var newMaxBotsValue = randomUtil.GetInt(minBots, maxBotsRange);
+
+        // Apply global bot limit if set (overrides multiplier if exceeded)
+        if (_modConfig.GlobalBotLimit > 0 && newMaxBotsValue > _modConfig.GlobalBotLimit)
+        {
+            newMaxBotsValue = _modConfig.GlobalBotLimit;
+        }
+
         var actualMultiplier = (double)newMaxBotsValue / maxBots;
         return SetMaxBotsAmountForLocation(location, maxBots, newMaxBotsValue, actualMultiplier);
     }
