@@ -1,7 +1,7 @@
 {
     "name":  "Pulse",
     "author":  "LumurkFox",
-    "version":  "1.0.1",
+    "version":  "1.0.2",
     "license":  "MIT",
     "main":  "Pulse.dll",
     "sptVersion":  "~4.0.0",

@@ -10,5 +10,6 @@ public class ModConfig
     public double BotCountMultiplierMax { get; set; } = 2.0;
     public int GlobalBotLimit { get; set; } = 0;
     public double BossSpawnChancePercent { get; set; } = 100.0;
+    public double PmcPercentage { get; set; } = 33.0;
     public bool Debug { get; set; }
 }
