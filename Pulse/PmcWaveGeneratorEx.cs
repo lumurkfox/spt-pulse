@@ -217,9 +217,10 @@ public class PmcWaveGeneratorEx(
         var locationId = location.Id.ToLower();
         var maxBots = location.BotMax;
 
-        // Calculate PMC count as 1/3 of total bot capacity
-        // Remaining 2/3 reserved for scavs
-        var maxPmcAmount = (int)Math.Ceiling(maxBots / 3.0);
+        // Calculate PMC count based on configured percentage
+        // Remaining percentage reserved for scavs
+        var pmcRatio = _modConfig.PmcPercentage / 100.0;
+        var maxPmcAmount = (int)Math.Ceiling(maxBots * pmcRatio);
 
         if (maxPmcAmount <= 0)
         {
@@ -233,7 +234,7 @@ public class PmcWaveGeneratorEx(
         if (_modConfig.Debug)
         {
             logger.LogWithColor(
-                $"[Unda] '{locationId}' maxBots: {maxBots}, maxPmcAmount (1/3 ratio): {maxPmcAmount}", LogTextColor.Blue);
+                $"[Unda] '{locationId}' maxBots: {maxBots}, maxPmcAmount ({_modConfig.PmcPercentage}% ratio): {maxPmcAmount}", LogTextColor.Blue);
         }
 
         // Split total PMC amount into random groups
@@ -421,14 +422,17 @@ public class PmcWaveGeneratorEx(
                 LogTextColor.Blue);
         }
 
-        // Each wave gets fresh bots: 1/3 PMC + 2/3 Scav
+        // Each wave gets fresh bots based on configured PMC percentage
+        var pmcRatio = _modConfig.PmcPercentage / 100.0;
+        var scavRatio = (100.0 - _modConfig.PmcPercentage) / 100.0;
+
         for (int i = 0; i < waveTimes.Count; i++)
         {
-            // Calculate PMC count for this wave (1/3 of maxBots)
-            int wavePmcCount = (int)Math.Ceiling(maxBots / 3.0);
+            // Calculate PMC count for this wave based on configured percentage
+            int wavePmcCount = (int)Math.Ceiling(maxBots * pmcRatio);
 
-            // Calculate Scav count for this wave (2/3 of maxBots)
-            int waveScavCount = (int)Math.Ceiling(maxBots * 2.0 / 3.0);
+            // Calculate Scav count for this wave (remaining percentage)
+            int waveScavCount = (int)Math.Ceiling(maxBots * scavRatio);
 
             // Generate PMC groups for this wave
             var pmcGroups = SplitMaxAmountIntoGroups(wavePmcCount, _modConfig.MaxPmcGroupSize);
@@ -554,14 +558,16 @@ public class PmcWaveGeneratorEx(
                 LogTextColor.Blue);
         }
 
-        // Each wave gets fresh bots with 1/3 PMC / 2/3 Scav split
+        // Each wave gets fresh bots based on configured PMC percentage
+        var scavRatio = (100.0 - _modConfig.PmcPercentage) / 100.0;
+
         for (int i = 0; i < waveTimes.Count; i++)
         {
             // Calculate bot count per wave using same logic as initial MaxBots
             int waveMaxBots = maxAssaultScavAmount;
 
-            // 2/3 of available bots for scavs this wave
-            int waveScavCount = (int)Math.Ceiling(waveMaxBots * 2.0 / 3.0);
+            // Remaining percentage of available bots for scavs this wave
+            int waveScavCount = (int)Math.Ceiling(waveMaxBots * scavRatio);
 
             // Split scavs for this wave into groups
             var waveGroups = SplitMaxAmountIntoGroups(waveScavCount, maxScavGroupSize);

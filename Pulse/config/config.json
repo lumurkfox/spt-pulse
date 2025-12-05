@@ -7,5 +7,6 @@
     "BotCountMultiplierMax":  2.0,
     "Debug":  false,
     "BossSpawnChancePercent":  100,
-    "GlobalBotLimit":  0
+    "GlobalBotLimit":  0,
+    "PmcPercentage":  33.0
 }

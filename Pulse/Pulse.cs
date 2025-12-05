@@ -11,7 +11,7 @@ public record ModMetadata : AbstractModMetadata
     public override string Name { get; init; } = "Pulse";
     public override string Author { get; init; } = "LumurkFox";
     public override List<string>? Contributors { get; init; } = new() { "Based on Unda by Barlog_M" };
-    public override SemanticVersioning.Version Version { get; init; } = new("1.0.0");
+    public override SemanticVersioning.Version Version { get; init; } = new("1.0.2");
     public override SemanticVersioning.Range SptVersion { get; init; } = new("~4.0.0");
     public override List<string>? Incompatibilities { get; init; } = new() { "li.barlog.unda" };
     public override Dictionary<string, SemanticVersioning.Range>? ModDependencies { get; init; } = new();

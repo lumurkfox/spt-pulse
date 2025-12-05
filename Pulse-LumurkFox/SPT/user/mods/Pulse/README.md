@@ -5,6 +5,7 @@
 ## Features
 
 - **Customizable PMC Group Sizes** - Control the maximum size of PMC groups
+- **PMC/Scav Ratio Control** - Set the percentage of PMCs vs Scavs per assault wave
 - **Scav Wave Configuration** - Adjust scav group sizes and spawn patterns
 - **Bot Count Multipliers** - Scale bot populations with configurable min/max multipliers
 - **Global Bot Limit** - Set a hard cap on maximum bot count that overrides multipliers
@@ -34,6 +35,7 @@ Edit `config/config.json` to customize your experience:
   "BotCountMultiplierMax": 2.0,
   "GlobalBotLimit": 0,
   "BossSpawnChancePercent": 100.0,
+  "PmcPercentage": 33.0,
   "Debug": false
 }
 ```
@@ -48,6 +50,7 @@ Edit `config/config.json` to customize your experience:
 - **BotCountMultiplierMax**: Maximum bot count multiplier (default: 2.0)
 - **GlobalBotLimit**: Hard cap on bot count. If the multiplier result exceeds this limit, bot count is capped at this value. Set to 0 to disable (default: 0)
 - **BossSpawnChancePercent**: Boss spawn chance percentage. 100.0 = normal spawn chances, 50.0 = half the chance, 200.0 = double the chance (default: 100.0)
+- **PmcPercentage**: Percentage of bots that spawn as PMCs per assault wave. 33.0 = 1/3 PMCs and 2/3 Scavs, 50.0 = equal split, 75.0 = mostly PMCs (default: 33.0)
 - **Debug**: Enable debug logging (default: false)
 
 ## Credits
@@ -69,4 +72,4 @@ MIT License - See LICENSE file for details
 
 ## Version
 
-1.0.0 - Compatible with SPT 4.0.x
+1.0.2 - Compatible with SPT 4.0.x
